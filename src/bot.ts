@@ -2,6 +2,20 @@ import { Bot, InlineKeyboard, webhookCallback } from "grammy";
 import express from "express";
 const { MongoClient } = require('mongodb');
 
+const formatDate = function (date, timeZone) {
+  const format_options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    timeZone,
+    timeZoneName: 'short'
+  }
+  return new Intl.DateTimeFormat('en-US', format_options).format(date);
+}
+
 // Create a bot using the Telegram token
 const bot = new Bot(process.env.TELEGRAM_TOKEN || "");
 
@@ -11,7 +25,7 @@ bot.command("check", async(ctx) => {
   const client = new MongoClient(uri);
   await client.connect();
   const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(1).toArray();
-  const currentTime = new Date(lastRecords[0]._id);
+  const currentTime = formatDate(new Date(lastRecords[0]._id), 'Europe/Kiev');
   const message = lastRecords[0].online ? `\u{2705} Cвітло є ${currentTime}` : `\u{274C} Світла немає ${currentTime}` 
   return ctx.reply(message) 
 });
