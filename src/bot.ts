@@ -11,11 +11,6 @@ const bot = new Bot(process.env.TELEGRAM_TOKEN || "");
 // Handle the /yo command to greet the user
 bot.command("check", (ctx) => ctx.reply(`Yo ${ctx.from?.username}`));
 
-// Handle the /about command
-const aboutUrlKeyboard = new InlineKeyboard().url(
-  "Бот для перевірки наявності електропостачання за адресою В 16"
-);
-
 // Suggest commands in the menu
 bot.api.setMyCommands([
   { command: "check", description: "Перевірка наявності світла" },
