@@ -46,7 +46,12 @@ const replyWithIntro = (ctx: any) =>
     parse_mode: "HTML"
   });
 
-bot.command("start", replyWithIntro);
+bot.command("start",  function (msg, match) {
+  const fromId = msg.from.id; // store that value and use it as param on sendMessage()
+  const name = msg.from.first_name
+  bot.sendMessage(fromId, `Welcome dear ${name} have fun`);
+});
+
 bot.on("message", replyWithIntro);
 
 // Start the server
