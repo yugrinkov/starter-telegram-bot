@@ -1,11 +1,18 @@
 import { Bot, InlineKeyboard, webhookCallback } from "grammy";
 import express from "express";
+const { MongoClient } = require('mongodb');
 
 // Create a bot using the Telegram token
 const bot = new Bot(process.env.TELEGRAM_TOKEN || "");
 
 // Handle the /yo command to greet the user
-bot.command("check", (ctx) => ctx.reply(`Yo ${ctx.from?.username}`));
+bot.command("check", async(ctx) => {
+  const uri = "mongodb+srv://nextjs:SMp92YTGrYtBlGpl@cluster0.lyklx.mongodb.net?retryWrites=true&w=majority";
+  const client = new MongoClient(uri);
+  await client.connect();
+  const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(2); 
+  ctx.reply(`Yo ${lastRecords}`) 
+});
 
 // Suggest commands in the menu
 bot.api.setMyCommands([
