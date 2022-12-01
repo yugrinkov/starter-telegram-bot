@@ -24,7 +24,6 @@ const introductionMessage = `Привіт! Цей телеграм бот доп
 
 const replyWithIntro = (ctx: any) =>
   ctx.reply(introductionMessage, {
-    reply_markup: aboutUrlKeyboard,
     parse_mode: "HTML",
   });
 
