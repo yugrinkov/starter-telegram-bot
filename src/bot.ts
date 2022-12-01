@@ -2,7 +2,7 @@ import { Bot, InlineKeyboard, webhookCallback } from "grammy";
 import express from "express";
 const { MongoClient } = require('mongodb');
 
-const formatDate = function (date, timeZone) {
+const formatDate = function (date: any, timeZone: any) {
   const format_options = {
     year: 'numeric',
     month: 'numeric',
