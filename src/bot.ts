@@ -11,8 +11,8 @@ bot.command("check", async(ctx) => {
   const client = new MongoClient(uri);
   await client.connect();
   const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(2).toArray();
-  console.log(lastRecords);
-  return ctx.reply(`Yo`) 
+  const message = lastRecords[0].online ? 'Cвітло є' : 'Світла немає' 
+  return ctx.reply(message) 
 });
 
 // Suggest commands in the menu
