@@ -10,7 +10,7 @@ bot.command("check", async(ctx) => {
   const uri = "mongodb+srv://nextjs:SMp92YTGrYtBlGpl@cluster0.lyklx.mongodb.net?retryWrites=true&w=majority";
   const client = new MongoClient(uri);
   await client.connect();
-  const lastRecords = await client.db("electricity").collection("logs").find({_id: -1}).limit(2).toArray();
+  const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(2).toArray();
   return ctx.reply(`Yo ${JSON.stringify(lastRecords)}`) 
 });
 
