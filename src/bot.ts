@@ -11,7 +11,7 @@ bot.command("check", async(ctx) => {
   const client = new MongoClient(uri);
   await client.connect();
   const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(1).toArray();
-  const message = lastRecords[0].online ? 'Cвітло є' : 'Світла немає' 
+  const message = lastRecords[0].online ? `\u{2705} Cвітло є` : `\u{274C} Світла немає` 
   return ctx.reply(message) 
 });
 
@@ -24,7 +24,7 @@ bot.api.setMyCommands([
 const introductionMessage = `\u{1F4A1} Привіт! Цей телеграм бот допоможе вам дізнатися статус щодо наявності світла за адресою В 16.
 
 <b>Команди</b>
-/check - Перевірити чи є світло`;
+/check - Перевірити чи є світло \u{2753}`;
 
 const replyWithIntro = (ctx: any) =>
   ctx.reply(introductionMessage, {
