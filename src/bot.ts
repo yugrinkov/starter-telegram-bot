@@ -10,7 +10,7 @@ bot.command("check", async(ctx) => {
   const uri = "mongodb+srv://nextjs:SMp92YTGrYtBlGpl@cluster0.lyklx.mongodb.net?retryWrites=true&w=majority";
   const client = new MongoClient(uri);
   await client.connect();
-  const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(2).toArray();
+  const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(1).toArray();
   const message = lastRecords[0].online ? 'Cвітло є' : 'Світла немає' 
   return ctx.reply(message) 
 });
@@ -21,7 +21,7 @@ bot.api.setMyCommands([
 ]);
 
 // Handle all other messages and the /start command
-const introductionMessage = `Привіт! Цей телеграм бот допоможе вам дізнатися статус щодо наявності світла за адресою В 16.
+const introductionMessage = `\u{1F4A1} Привіт! Цей телеграм бот допоможе вам дізнатися статус щодо наявності світла за адресою В 16.
 
 <b>Команди</b>
 /check - Перевірити чи є світло`;
