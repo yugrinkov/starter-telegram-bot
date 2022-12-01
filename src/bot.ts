@@ -26,7 +26,7 @@ bot.command("check", async(ctx) => {
   await client.connect();
   const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(1).toArray();
   const currentTime = formatDate(new Date(lastRecords[0]._id), 'Europe/Kiev');
-  const message = lastRecords[0].online ? `${currentTime} \n \u{2705} Cвітло є!` : `${currentTime} \n \u{274C} Світла немає` 
+  const message = lastRecords[0].online ? `${currentTime} \n\u{2705} Cвітло є!` : `${currentTime} \n\u{274C} Світла немає` 
   return ctx.reply(message) 
 });
 
