@@ -11,7 +11,8 @@ bot.command("check", async(ctx) => {
   const client = new MongoClient(uri);
   await client.connect();
   const lastRecords = await client.db("electricity").collection("logs").find().sort({_id: -1}).limit(1).toArray();
-  const message = lastRecords[0].online ? `\u{2705} Cвітло є` : `\u{274C} Світла немає` 
+  const currentTime = new Date(lastRecords[0]._id);
+  const message = lastRecords[0].online ? `\u{2705} Cвітло є ${currentTime}` : `\u{274C} Світла немає ${currentTime}` 
   return ctx.reply(message) 
 });
 
