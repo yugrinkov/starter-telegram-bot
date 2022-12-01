@@ -49,7 +49,8 @@ const replyWithIntro = (ctx: any) =>
 bot.command("start",  function (msg, match) {
   const fromId = msg?.from?.id; // store that value and use it as param on sendMessage()
   const name = msg?.from?.first_name
-  console.log(msg);
+  console.log(JSON.stringify(msg.from));
+  console.log(JSON.stringify(msg.chat));
 });
 
 bot.on("message", replyWithIntro);
