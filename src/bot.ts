@@ -13,7 +13,7 @@ const formatDate = function (date, timeZone) {
     timeZone,
     timeZoneName: 'short'
   }
-  return new Intl.DateTimeFormat('en-US', format_options).format(date);
+  return new Intl.DateTimeFormat('en-US', format_options as any).format(date);
 }
 
 // Create a bot using the Telegram token
