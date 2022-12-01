@@ -1,9 +1,5 @@
 import { Bot, InlineKeyboard, webhookCallback } from "grammy";
-import { chunk } from "lodash";
 import express from "express";
-import { applyTextEffect, Variant } from "./textEffects";
-
-import type { Variant as TextEffectVariant } from "./textEffects";
 
 // Create a bot using the Telegram token
 const bot = new Bot(process.env.TELEGRAM_TOKEN || "");
@@ -24,7 +20,7 @@ const introductionMessage = `Привіт! Цей телеграм бот доп
 
 const replyWithIntro = (ctx: any) =>
   ctx.reply(introductionMessage, {
-    parse_mode: "HTML",
+    parse_mode: "HTML"
   });
 
 bot.command("start", replyWithIntro);
